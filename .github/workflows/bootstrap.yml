@@ -1,0 +1,28 @@
+name: Import website source
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Extract website source
+        run: |
+          if [ ! -f e-sone-shanghai-source-20260828.zip ]; then
+            echo "Waiting for source archive."
+            exit 0
+          fi
+          unzip -o e-sone-shanghai-source-20260828.zip
+          rm e-sone-shanghai-source-20260828.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Import complete E-sone website source"
+          git push
