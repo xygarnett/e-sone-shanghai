@@ -39,6 +39,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /e-sone-shanghai
         run: |
           pnpm build
+          node scripts/export-github-pages.mjs
           test -f dist/client/index.html
           touch dist/client/.nojekyll
       - name: Upload Pages artifact
