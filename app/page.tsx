@@ -29,7 +29,7 @@ const proofPoints = [
   },
   {
     label: "CERTIFIED TEAM",
-    title: "Alibaba Marketing 五つ星サービスチーム",
+    title: <>Alibaba Marketing<br />五つ星サービスチーム</>,
     text: "プラットフォームルール、広告運用、消費者理解に精通した専門チームが、大型販促期から日常運営まで伴走します。",
   },
   {
@@ -395,7 +395,7 @@ const subpageMeta = {
   cases: {
     index: "04",
     eyebrow: "BRAND SUCCESS STORIES",
-    title: "成長の背景にある、実行の記録。",
+    title: <><span className="cases-title-line">成長の背景にある、</span><br /><span className="cases-title-line">実行の記録。</span></>,
     lead: "日本・グローバルブランドの中国市場参入、EC運営、マーケティング支援事例をご紹介します。",
     image: "https://www.goldwin-global.com/assets/feature/cactus-store/img/mv%40pc.jpg",
   },
