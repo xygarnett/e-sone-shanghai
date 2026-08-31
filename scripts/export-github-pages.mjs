@@ -28,6 +28,8 @@ assert.deepEqual(result.errors, [], "All pages must render successfully.");
 const rendered = path.join(staging, basePath.slice(1));
 const output = path.join(root, "dist", "client");
 await fs.cp(rendered, output, { recursive: true });
+// Vite emits prefixed asset folders; Pages already supplies that URL prefix.
+await fs.cp(path.join(output, basePath.slice(1), "_next"), path.join(output, "_next"), { recursive: true });
 for (const route of routes) {
   const page = path.join(output, route.pattern.slice(1), "index.html");
   const html = await fs.readFile(page, "utf8");
@@ -39,6 +41,10 @@ for (const route of routes) {
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<link\b(?=[^>]*\brel="modulepreload")[^>]*>/gi, "");
   await fs.writeFile(page, staticHtml);
+  for (const match of staticHtml.matchAll(/<link\b[^>]*href="([^"]+\.css)"[^>]*>/g)) {
+    assert.ok(match[1].startsWith(`${basePath}/`), "Stylesheets must use the public base path.");
+    await fs.access(path.join(output, match[1].slice(basePath.length + 1)));
+  }
 }
 await fs.writeFile(path.join(output, ".nojekyll"), "");
 console.log(`Verified ${routes.length} static pages for ${basePath}.`);
