@@ -252,6 +252,10 @@ a {
   font-size: clamp(46px, 5.4vw, 78px);
 }
 
+.cases-title-line {
+  white-space: nowrap;
+}
+
 .subpage-lead {
   max-width: 690px;
   margin-bottom: 34px;
@@ -3410,6 +3414,7 @@ footer { font-size: 12px; }
   .subpage-copy { left: 24px; width: calc(100% - 48px); }
   .subpage-copy > p:first-child { font-size: 11px; }
   .subpage-copy h1 { font-size: 34px; line-height: 1.42; }
+  .site-view-cases .subpage-copy h1 { font-size: clamp(26px, 8vw, 34px); }
   .subpage-lead { font-size: 16px; line-height: 1.85; }
   .subpage-copy > a { font-size: 13px; }
   .eyebrow,
